@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "contapics-backend.fullname" . }}
+  labels:
+    app: {{ include "contapics-backend.fullname" . }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ include "contapics-backend.fullname" . }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}

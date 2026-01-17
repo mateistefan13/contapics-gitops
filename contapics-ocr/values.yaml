@@ -1,0 +1,21 @@
+image:
+  repository: contapics-ocr-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 5001
+  type: NodePort
+
+env:
+  aws:
+    region: us-east-1
+    s3Endpoint: http://contapics-minio:9000
+    bucketName: contapics
+
+  ocrServiceUrl: http://contapics-ocr:5001
+
+secrets:
+  aws:
+    accessKeyId: minio
+    secretAccessKey: minio123

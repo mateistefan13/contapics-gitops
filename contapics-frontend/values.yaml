@@ -1,0 +1,11 @@
+image:
+  repository: contapics-frontend
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  type: NodePort
+
+env:
+  backendUrl: http://contapics-backend:8080

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "contapics-backend.fullname" . }}
+  labels:
+    app: {{ include "contapics-backend.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "contapics-backend.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "contapics-backend.fullname" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "contapics-backend.fullname" . }}
+            - secretRef:
+                name: {{ include "contapics-backend.fullname" . }}

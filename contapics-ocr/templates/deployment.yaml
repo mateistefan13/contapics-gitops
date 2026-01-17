@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "contapics-ocr.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "contapics-ocr.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "contapics-ocr.fullname" . }}
+    spec:
+      containers:
+        - name: ocr-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "contapics-ocr.fullname" . }}
+            - secretRef:
+                name: {{ include "contapics-ocr.fullname" . }}
+          ports:
+            - containerPort: {{ .Values.service.port }}

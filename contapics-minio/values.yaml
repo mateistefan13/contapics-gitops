@@ -1,0 +1,16 @@
+image:
+  repository: minio/minio
+  tag: latest
+  pullPolicy: IfNotPresent
+
+secrets:
+  minio:
+    rootUser: minio
+    rootPassword: minio123
+
+service:
+  port: 9000
+  consolePort: 9001
+
+persistence:
+  size: 1Gi
