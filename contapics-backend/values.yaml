@@ -16,10 +16,10 @@ env:
 
   aws:
     region: us-east-1
-    s3Endpoint: http://minio:9000
+    s3Endpoint: http://contapics-minio:9000
     bucketName: contapics
 
-  ocrServiceUrl: http://ocr-service:5001
+  ocrServiceUrl: http://contapics-ocr:5001
 
 secrets:
   db:

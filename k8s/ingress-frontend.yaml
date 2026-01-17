@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: contapics-frontend
+spec:
+  rules:
+    - host: contapics.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: contapics-frontend
+                port:
+                  number: 80

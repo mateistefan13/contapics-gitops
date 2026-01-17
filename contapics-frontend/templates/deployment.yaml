@@ -21,3 +21,11 @@ spec:
               value: {{ .Values.env.backendUrl | quote }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          volumeMounts:
+            - name: frontend-config
+              mountPath: /usr/share/nginx/html/config.js
+              subPath: config.js
+      volumes:
+        - name: frontend-config
+          configMap:
+            name: contapics-frontend-config

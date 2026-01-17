@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-bucket
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: mc
+          image: minio/mc:latest
+          command: ["/bin/sh","-lc"]
+          args:
+            - >
+              mc alias set local http://{{ .Release.Name }}:9000 {{ .Values.auth.rootUser }} {{ .Values.auth.rootPassword }} &&
+              mc mb --ignore-existing local/{{ .Values.bucket.name }} &&
+              echo "Bucket ensured"

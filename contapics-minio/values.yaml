@@ -14,3 +14,10 @@ service:
 
 persistence:
   size: 1Gi
+
+auth:
+  rootUser: minio
+  rootPassword: minio123
+
+bucket:
+  name: contapics

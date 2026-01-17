@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: contapics-frontend-config
+data:
+  config.js: |
+    window._env_ = { BACKEND_URL: "/api" };
