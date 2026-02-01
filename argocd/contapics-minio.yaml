@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: contapics-minio
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/mateistefan13/contapics-gitops.git
+    targetRevision: main
+    path: contapics-minio
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
